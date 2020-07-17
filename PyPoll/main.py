@@ -5,5 +5,10 @@ import csv
 import os
 
 #Poll Data Pathway
-file_to_poll_data = r"/Users/kent.thomas/Repository/Python-Challenge/PyPoll/Resources/election_data.csv"
+poll_data_csv = os.path.join("PyPoll/Resources/election_data.csv")
 
+with open(poll_data_csv) as poll_data:
+    reader =csv.reader(poll_data)
+    header = next(poll_data)
+    print (header)
+    
