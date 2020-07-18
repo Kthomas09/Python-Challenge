@@ -8,21 +8,25 @@ import os
 poll_data_csv = os.path.join("PyPoll/Resources/election_data.csv")
 
 with open(poll_data_csv) as poll_data:
-    reader =csv.reader(poll_data)
+    poll_reader =csv.reader(poll_data)
     header = next(poll_data)
     # print (header)
 
     #Variable for Total Votes
     total_votes = 0
-    
+    candidate_name = []
     #Function to tabulate the votes
     def poll_tabulation (poll_data):
-        candidate = str(poll_data[2])
+        
     #For loop to iterate through polling data to calculate total votes and reassign total votes variable.
-        for row in poll_data:
+        for row in poll_reader:
             total_votes += 1
-            candidate = str(row[2])
-        print (str(candidate))
+
+        for row in poll_reader:
+            name = poll_reader(row[2])
+            candidate_name.append(name)
+        print (candidate_name)
+            
 
 
 # # Election Results Table
