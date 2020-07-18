@@ -1,8 +1,8 @@
 #PyPoll Python Script
 
 #Importing CSV and OS
-import csv
 import os
+import csv 
 
 #Poll Data Pathway
 poll_data_csv = os.path.join("PyPoll/Resources/election_data.csv")
@@ -14,7 +14,7 @@ with open(poll_data_csv) as poll_data:
 
     #Variable for Total Votes
     total_votes = 0
-    candidate_name = []
+    candidate_total = {}
     #Function to tabulate the votes
     def poll_tabulation (poll_data):
         
