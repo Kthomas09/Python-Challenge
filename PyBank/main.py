@@ -1,8 +1,16 @@
+# PyBank Script
+# Objective: 1) Calculate Total Months
+#            2) Total Profit
+#            3) Average change in profit. (subtract change, create list, add list, divide by length)   
+#            4) Maximum increase in profit change (Print Mon. and Date)
+#            5) Maximum decrease in profit change (Print Mon. and Date)
+
+# Import modules
 import os
 import csv
 
 
-# Set Path For File
+# Set input and output pathways
 budgetPath = os.path.join("PyBank/Resources/budget_data.csv")
 analysisOutput = os.path.join("PyBank/Analysis/Analysis.text")
 
@@ -18,47 +26,41 @@ decreaseMonth = 0
 
 # Open & Read CSV File
 with open(budgetPath, newline="") as csvfile:
-    # CSV Reader Specifies Delimiter & Variable That Holds Contents
+    # Variable reads CSV File and specifies delimiter
     budgetReader = csv.reader(csvfile, delimiter=",")
-    # Read The Header Row First (Skip This Step If There Is No Header)
+    # Variable to Skip Header
     budgetHeader = next(budgetReader)
+    # Variable to skip row. This is used in the Average Calculation.
     row = next(budgetReader)
-    # Calculate Total Number Of Months, Net Amount Of “Profit/Losses” & Set Variables For Rows
+    # variables for total Months, total Profit, and  specify locations in DataSet
     previous = int(row[1])
     totMonths += 1
     totProfit += int(row[1])
     increase = int(row[1])
     increaseMonth = row[0]
-    # Read Each Row Of Data After The Header
+    # Read each row of usuable data
     for row in budgetReader:
-        # Calculate Total Number Of Months Included In Dataset
+        # Calculate Total Number Of Months
         totMonths += 1
-        # Calculate Net Amount Of “Profit/Losses” Over The Entire Period
+        # Calculate Net “Profit/Losses” over data period
         totProfit += int(row[1])
-        # Calculate Change From Current Month To Previous Month
+        # Calculate the difference of current month to previous month and create the profitDifference and monthList
         profitChange = int(row[1]) - previous
         profitDifference.append(profitChange)
         previous = int(row[1])
         monthsList.append(row[0])
-        # Calculate The Greatest Increase
+        # Calculate The Maximum Increase
         if int(row[1]) > increase:
             increase = int(row[1])
             increaseMonth = row[0]
-        # Calculate The Greatest Decrease
+        # Calculate The Maximum Decrease
         if int(row[1]) < decrease:
             decrease = int(row[1])
             decreaseMonth = row[0]
-    # Calculate The Average & The Date
+    # Calculate The Average & Month/Year
     averageChange = sum(profitDifference)/ len(profitDifference)
     highest = max(profitDifference)
     lowest = min(profitDifference)
-# Print Analysis
-    # print("Financial Analysis")
-    # print(totProfit)
-    # print(averageChange)
-    # print(increaseMonth, highest)
-    # print(decreaseMonth, decrease)
-
 
     output = (
         f"Financial Analysis\n"
