@@ -9,8 +9,8 @@ import os
 import csv
 
 #set input and output pathways
-filePath = os.path.join("PyPoll/Resources/election_data.csv")
-electionOutput = os.path.join("PyPoll/Analysis/Election Results.text")
+filePath = os.path.join("Resources/election_data.csv")
+electionOutput = os.path.join("Analysis/Election Results.text")
 
 #variables
 candidateTable = []
@@ -53,27 +53,23 @@ for count in range(len(candidateTable)):
         maxName = count
 # Winner Variable
 winner = candidateTable[maxName]
-formatPercent = "{:.3}".format(percentages)
-
-# output = (
-#     f"Election Results\n"
-#     f"---------------------\n"
-#     f"Total Votes: {votes}\n"
-# for count in range(len(candidateTable))
-#     f"{candidateTable[count]}: {formatPercent[count]} ({ballotCount[count]})\n"
-#     f"----------------------\n"
-#     f"winner: {winner}"
-#     f"-----------------------"
-# )
-
-# with open(electionOutput, "w",) as txt_file:
-#     txt_file.write(output)
-#print results
-print("Election Results")
-print("--------------------------")
-print(f"Total Votes: {votes}")
+# For loop to establish varibale used in output statement
 for count in range(len(candidateTable)):
-    print(f"{candidateTable[count]}: {percentages[count]}% ({ballotCount[count]})")
-print("---------------------------")
-print(f"Winner: {winner}")
-print("---------------------------")
+   printTable = f"{candidateTable[count]}: {percentages[count]:.3f}% ({ballotCount[count]})"
+
+# Varable for export text
+output = (
+    f"Election Results\n"
+    f"---------------------\n"
+    f"Total Votes: {votes}\n"
+    f"{printTable}\n"
+    f"----------------------\n"
+    f"winner: {winner}\n"
+    f"-----------------------"
+)
+# Writing and Exporting file
+with open(electionOutput, "w",) as txt_file:
+    txt_file.write(output)
+
+# Closing csv file
+pollData.close()
