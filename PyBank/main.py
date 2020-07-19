@@ -11,8 +11,8 @@ import csv
 
 
 # Set input and output pathways
-budgetPath = os.path.join("PyBank/Resources/budget_data.csv")
-analysisOutput = os.path.join("PyBank/Analysis/Financial Analysis.text")
+budgetPath = os.path.join("Resources/budget_data.csv")
+analysisOutput = os.path.join("Analysis/Financial Analysis.text")
 
 # Variables
 totMonths = 0
@@ -25,9 +25,9 @@ decrease = 0
 decreaseMonth = 0
 
 # Open & Read CSV File
-with open(budgetPath, newline="") as csvfile:
+with open(budgetPath, newline="") as budgetData:
     # Variable reads CSV File and specifies delimiter
-    budgetReader = csv.reader(csvfile, delimiter=",")
+    budgetReader = csv.reader(budgetData, delimiter=",")
     # Variable to Skip Header
     budgetHeader = next(budgetReader)
     # Variable to skip row. This is used in the Average Calculation.
@@ -62,6 +62,7 @@ with open(budgetPath, newline="") as csvfile:
     highest = max(profitDifference)
     lowest = min(profitDifference)
 
+    # Variable for text to Export
     output = (
         f"Financial Analysis\n"
         f" ----------------------\n"
@@ -71,8 +72,12 @@ with open(budgetPath, newline="") as csvfile:
         f"Greatest Increase in Profits:, {increaseMonth}, (${highest})\n"
         f"Greatest Decrease in Profits:, {decreaseMonth}, (${lowest})\n")
 
+# Writing and Exporting Analysis
 with open(analysisOutput, "w",) as txt_file:
     txt_file.write(output)
+
+# Closing File
+budgetData.close()
 
     
 
