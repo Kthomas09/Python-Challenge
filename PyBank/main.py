@@ -4,7 +4,7 @@ import csv
 
 # Set Path For File
 budgetPath = os.path.join("PyBank/Resources/budget_data.csv")
-analysisOutput = os.path.join("PyBank/Analysis.text")
+analysisOutput = os.path.join("PyBank/Analysis/Analysis.text")
 
 # Variables
 totMonths = 0
