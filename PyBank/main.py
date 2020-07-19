@@ -1,72 +1,76 @@
-#PyBank Python Script
-
-#Importing CSV and OS
 import os
 import csv
 
 
-#Budget Data Pathway
-budget_data_csv =  os.path.join("PyBank/Resources/budget_data.csv")
-analysis_output = os.path.join("PyBank/Analysis")
-#Opening 
-with open(budget_data_csv) as budget_data:
-    budget_reader = csv.reader(budget_data)
-    header = next(budget_data)
-    # output= #What is the statement to export?
-    
-    # empty lists to be populated by for loops for easier calcuation
-    months = []
-    profits =[]
-    profitdiff = []
-    # greatestincrease = ["",0]
-    # greatestdecrease = ["". 99999999]
+# Set Path For File
+budgetPath = os.path.join("PyBank/Resources/budget_data.csv")
+analysisOutput = os.path.join("PyBank/Analysis.text")
 
-    # Global Variables
-    total_profit = 0
-    difference = 0
-   
+# Variables
+totMonths = 0
+totProfit = 0
+profitDifference= []
+monthsList = []
+increase = 0
+increaseMonth = 0
+decrease = 0
+decreaseMonth = 0
 
-    # for loop to populate the empty lists above + total profit
-    for row in budget_reader:
-        months.append(row[0])
-        profits.append(row[1])
-        total_profit = total_profit + int(row[1])
-        
-
-    # for loop to calculate the difference of profit change
-    for row in range(len(profits)-1):
-        difference = int(profits[row+1]) - int(profits[row])
-        profitdiff.append(difference)
-    # calculations for average net profit
-    sumofprofit = sum(profitdiff)
-    averageprofit = sumofprofit/len(profitdiff)
-    formattedaverage = "{:.2f}".format(averageprofit)
-
-## Test prints
-    # print(months)
-    # print(profits)
-    # print(total_profit)
-    # print(profitdiff)
-    print(formattedaverage)
-            
-
-budget_data.close.()
-
-analysis_output = "\nFinancial Analysis"
-"\nTotal Months: " + str(months)
-"\n Total Profits: $" + str(total_profit)
-"\n Average Net Profit: $" + str(formattedaverage)
-#Greater Increase print statement
-#Greatest Decrease print statement
-
-# Writing Financial Analysis file to analysis folder.
-with open(analysis_output) as textfile:
-    text_file.write(analysis_output)
-
+# Open & Read CSV File
+with open(budgetPath, newline="") as csvfile:
+    # CSV Reader Specifies Delimiter & Variable That Holds Contents
+    budgetReader = csv.reader(csvfile, delimiter=",")
+    # Read The Header Row First (Skip This Step If There Is No Header)
+    budgetHeader = next(budgetReader)
+    row = next(budgetReader)
+    # Calculate Total Number Of Months, Net Amount Of “Profit/Losses” & Set Variables For Rows
+    previous = int(row[1])
+    totMonths += 1
+    totProfit += int(row[1])
+    increase = int(row[1])
+    increaseMonth = row[0]
+    # Read Each Row Of Data After The Header
+    for row in budgetReader:
+        # Calculate Total Number Of Months Included In Dataset
+        totMonths += 1
+        # Calculate Net Amount Of “Profit/Losses” Over The Entire Period
+        totProfit += int(row[1])
+        # Calculate Change From Current Month To Previous Month
+        profitChange = int(row[1]) - previous
+        profitDifference.append(profitChange)
+        previous = int(row[1])
+        monthsList.append(row[0])
+        # Calculate The Greatest Increase
+        if int(row[1]) > increase:
+            increase = int(row[1])
+            increaseMonth = row[0]
+        # Calculate The Greatest Decrease
+        if int(row[1]) < decrease:
+            decrease = int(row[1])
+            decreaseMonth = row[0]
+    # Calculate The Average & The Date
+    averageChange = sum(profitDifference)/ len(profitDifference)
+    highest = max(profitDifference)
+    lowest = min(profitDifference)
+# Print Analysis
+    # print("Financial Analysis")
+    # print(totProfit)
+    # print(averageChange)
+    # print(increaseMonth, highest)
+    # print(decreaseMonth, decrease)
 
 
+    output = (
+        f"Financial Analysis\n"
+        f" ----------------------\n"
+        f"Total Months: {totMonths}\n"
+        f"Total: ${totProfit}\n"
+        f"Average Change: ${averageChange}\n"
+        f"Greatest Increase in Profits:, {increaseMonth}, (${highest})\n"
+        f"Greatest Decrease in Profits:, {decreaseMonth}, (${lowest})\n")
 
-
+with open(analysisOutput, "w",) as txt_file:
+    txt_file.write(output)
 
     
 
