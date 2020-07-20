@@ -8,12 +8,80 @@
 import os
 import csv
 
-#set input and output pathways
-filePath = os.path.join("Resources/election_data.csv")
-electionOutput = os.path.join("Analysis/Election Results.text")
+# file pathways
+filepath = os.path.join("Resources/election_data.csv")
+exportpath = os.path.join("Analysis/Election Results.txt")
 
-#variables
-totVote = 0
-candidateName = []
+# Variables
+candidateTable = []
+votes = 0
+ballotCount = []
 
-with open(filePath)
+#open the CSV file and establish varibale to read.
+with open(filepath,newline="") as polldata:
+    electionReader = csv.reader(polldata)
+    # variable skips header
+    header = next(polldata)
+    # print(header)
+
+    #go through each row to tabulate votes
+    for row in electionReader:
+        votes = votes + 1
+        # print(votes)
+        candidate = row[2]
+        # print(candidate)
+
+        #tabulating candidate votes to candidateTable
+        if candidate in candidateTable:
+            candidateTotals = candidateTable.index(candidate)
+            candidateTable.append(candidate)
+        print(candidateTable)
+        #     ballotCount[candidateTotals] = ballotCount[candidateTotals] + 1
+        # #else append 1 vote to candidate and add a new row to lists
+        # else:
+        #     candidateTable.append(candidate)
+        #     ballotCount.append(1)
+
+# #Variables for percentage of votes
+# percentages = []
+# maxVotes = ballotCount[0]
+# maxName = 0
+
+# #Find the percentage of votes for each candidate
+# for count in range(len(candidateTable)):
+#     votePercentage = ballotCount[count]/votes*100
+#     percentages.append(votePercentage)
+#     # printTable = f"{candidateTable[count]}: {percentages[count]:.3f}% ({ballotCount[count]})"
+#     # Determines winner
+#     if ballotCount[count] > maxVotes:
+#         maxVotes = ballotCount[count]
+#         maxName = count
+
+# # Winner Variable
+# winner = candidateTable[maxName]
+# print(f"Election Results")
+# print(f"---------------------")
+# print(f"Total Votes: {votes}")
+# print(candidateTable), percentages, {ballotCount}")
+# print(f"----------------------")
+# print(f"winner: {winner}")
+# print(f"-----------------------")
+
+# # # Varable for export text
+# # output = (
+# #     f"Election Results\n"
+# #     f"---------------------\n"
+# #     f"Total Votes: {votes}\n"
+# #     f"{candidateTable}: {percentages[count]:.3f}% ({ballotCount[count]})\n"
+# #     f"----------------------\n"
+# #     f"winner: {winner}\n"
+# #     f"-----------------------"
+# # )
+# # # Writing and Exporting file
+# # with open(electionOutput, "w",) as txt_file:
+# #     txt_file.write(output)
+
+# # # Closing csv file
+# # pollData.close()
+
+

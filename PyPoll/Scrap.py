@@ -23,7 +23,7 @@ with open(filePath, newline="") as pollData:
         
 
 # Exported file with bug
-    candidateTable = []
+candidateTable = []
 votes = 0
 ballotCount = []
 
