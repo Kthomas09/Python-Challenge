@@ -41,11 +41,11 @@ percentages = []
 maxVotes = ballotCount[0]
 maxName = 0
 #Find the percentage of votes for each candidate
-for count in range(len(candidateTable)):
-    votePercentage = ballotCount[count]/votes*100
+for i in range(len(candidateTable)):
+    votePercentage = ballotCount[i]/votes*100
     percentages.append(votePercentage)
 # print(percentages)
-print(f"{candidateTable[count]}: {percentages[count]:.3f}% ({ballotCount[count]})")
+print(f"{candidateTable[i]}: {percentages[i]:.3f}% ({ballotCount[i]})")
     # Determines winner
 #     if ballotCount[count] > maxVotes:
 #         maxVotes = ballotCount[count]
