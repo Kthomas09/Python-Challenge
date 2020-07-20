@@ -35,46 +35,55 @@ with open(filepath,newline="") as polldata:
         else:
             candidateTable.append(candidate)
             ballotCount.append(1)
-# ==============================================================================
-#Variables for percentage of votes
-percentages = []
-maxVotes = ballotCount[0]
-maxName = 0
-#Find the percentage of votes for each candidate
-for i in range(len(candidateTable)):
-    votePercentage = ballotCount[i]/votes*100
-    percentages.append(votePercentage)
-# print(percentages)
-print(f"{candidateTable[i]}: {percentages[i]:.3f}% ({ballotCount[i]})")
-    # Determines winner
-#     if ballotCount[count] > maxVotes:
-#         maxVotes = ballotCount[count]
-#         maxName = count
-# # # Winner Variable
-# winner = candidateTable[maxName]
-# print(f"Election Results")
-# print(f"---------------------")
-# print(f"Total Votes: {votes}")
-# print(candidateTable), percentages, {ballotCount}")
-# print(f"----------------------")
-# print(f"winner: {winner}")
-# print(f"-----------------------")
 
-# # # Varable for export text
-# # output = (
-# #     f"Election Results\n"
-# #     f"---------------------\n"
-# #     f"Total Votes: {votes}\n"
-# #     f"{candidateTable}: {percentages[count]:.3f}% ({ballotCount[count]})\n"
-# #     f"----------------------\n"
-# #     f"winner: {winner}\n"
-# #     f"-----------------------"
-# # )
-# # # Writing and Exporting file
-# # with open(electionOutput, "w",) as txt_file:
-# #     txt_file.write(output)
+    # ==============================================================================
+    #Variables for percentage of votes
+    percentages = []
+    maxVotes = ballotCount[0]
+    maxName = 0
+    #Find the percentage of votes for each candidate
+    for i in range(len(candidateTable)):
+        votePercentage = round(ballotCount[i]/votes*100)
+        percentages.append(votePercentage)
+        # print(f"{candidateTable[i]}: {percentages[i]:.3f}% ({ballotCount[i]})")
+    # # print(percentages)
+    # # for count in candidateTable:
+    # #     print(f"{candidateTable[count]}: {percentages[count]:.3f}% ({ballotCount[count]})")
+    #     # Determines winner
+        if ballotCount[i] == maxVotes:
+            maxVotes = ballotCount[i]
+            maxName = i
+        
 
-# # # Closing csv file
-# # pollData.close()
+        # # # # Winner Variable
+        winner = candidateTable[maxName]
+
+        print(f"Election Results")
+        print(f"---------------------")
+        print(f"Total Votes: {votes}")
+        print(f"{candidateTable[i]}: {percentages[i]:.3f}% ({ballotCount[i]}")
+        print(f"----------------------")
+        print(f"Winner: {winner}")
+        print(f"-----------------------")
+
+    #         # Varable for export text
+    #     output = (
+    #         f"Election Results\n"
+    #         f"---------------------\n"
+    #         f"Total Votes: {votes}\n"
+    #         f"{electionResults})\n"
+    #         f"{electionResults})\n"
+    #         f"{electionResults})\n"
+    #         f"{electionResults})\n"
+    #         f"----------------------\n"
+    #         f"winner: {winner}\n"
+    #         f"-----------------------"
+    #     )
+    #         # Writing and Exporting file
+    #     with open(exportpath, "w",) as txt_file:
+    #         txt_file.write(output)
+
+    #     # Closing csv file
+    #     polldata.close()
 
 
