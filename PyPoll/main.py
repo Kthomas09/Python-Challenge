@@ -34,14 +34,13 @@ with open(filepath,newline="") as polldata:
         #tabulating candidate votes to candidateTable
         if candidate in candidateTable:
             candidateTotals = candidateTable.index(candidate)
+            ballotCount[candidateTotals] = ballotCount[candidateTotals] + 1
+        #else append 1 vote to candidate and add a new row to lists
+        else:
             candidateTable.append(candidate)
-        print(candidateTable)
-        #     ballotCount[candidateTotals] = ballotCount[candidateTotals] + 1
-        # #else append 1 vote to candidate and add a new row to lists
-        # else:
-        #     candidateTable.append(candidate)
-        #     ballotCount.append(1)
-
+            ballotCount.append(1)
+        # print(candidateTable)
+    print(ballotCount)
 # #Variables for percentage of votes
 # percentages = []
 # maxVotes = ballotCount[0]
