@@ -71,6 +71,8 @@ with open(budgetPath, newline="") as budgetData:
         f"Average Change: ${averageChange}\n"
         f"Greatest Increase in Profits:, {increaseMonth}, (${highest})\n"
         f"Greatest Decrease in Profits:, {decreaseMonth}, (${lowest})\n")
+    #Printing output to terminal
+    print(output)
 
 # Writing and Exporting Analysis
 with open(analysisOutput, "w",) as txt_file:
