@@ -36,16 +36,21 @@ with open(filepath,newline="") as polldata:
             candidateTable.append(candidate)
             ballotCount.append(1)
 
-    # ==============================================================================
+    # Variable to establish the first portion of the export statement
+    output1= (f"Election Results\n" + f"---------------------\n" + f"Total Votes: {votes}\n")
+    
     #Variables for percentage of votes
     percentages = []
     maxVotes = ballotCount[0]
+    electionResults = ""
     maxName = 0
     #Find the percentage of votes for each candidate
     for i in range(len(candidateTable)):
-        votePercentage = round(ballotCount[i]/votes*100)
+        votePercentage = ballotCount[i]/votes*100
         percentages.append(votePercentage)
-        # print(f"{candidateTable[i]}: {percentages[i]:.3f}% ({ballotCount[i]})")
+        Results=f"{candidateTable[i]}: {percentages[i]:.3f}% ({ballotCount[i]})\n"
+        electionResults += Results
+    
     # # print(percentages)
     # # for count in candidateTable:
     # #     print(f"{candidateTable[count]}: {percentages[count]:.3f}% ({ballotCount[count]})")
@@ -58,32 +63,14 @@ with open(filepath,newline="") as polldata:
         # # # # Winner Variable
         winner = candidateTable[maxName]
 
-        print(f"Election Results")
-        print(f"---------------------")
-        print(f"Total Votes: {votes}")
-        print(f"{candidateTable[i]}: {percentages[i]:.3f}% ({ballotCount[i]}")
-        print(f"----------------------")
-        print(f"Winner: {winner}")
-        print(f"-----------------------")
+    output2 = (f"----------------------\n" + f"winner: {winner}\n" + f"-----------------------")
+    output = (output1 + electionResults + output2)
+    print(output)
+    # Writing and Exporting file
+    with open(exportpath, "w",) as txt_file:
+        txt_file.write(output)
 
-    #         # Varable for export text
-    #     output = (
-    #         f"Election Results\n"
-    #         f"---------------------\n"
-    #         f"Total Votes: {votes}\n"
-    #         f"{electionResults})\n"
-    #         f"{electionResults})\n"
-    #         f"{electionResults})\n"
-    #         f"{electionResults})\n"
-    #         f"----------------------\n"
-    #         f"winner: {winner}\n"
-    #         f"-----------------------"
-    #     )
-    #         # Writing and Exporting file
-    #     with open(exportpath, "w",) as txt_file:
-    #         txt_file.write(output)
-
-    #     # Closing csv file
-    #     polldata.close()
+    # Closing csv file
+    polldata.close()
 
 
