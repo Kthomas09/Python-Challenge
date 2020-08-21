@@ -2,7 +2,7 @@
 
 ## Background
 
-In this homework assignment, I'll be using the concepts I've learned to complete the **two** Python Challenges, PyBank and PyPoll.
+In this assignment, I'll be using the concepts I've learned to complete the **two** Python Challenges, PyBank and PyPoll.
 
 Both of these challenges encompasses a real-world situation where my newfound Python scripting skills can come in handy.
 
